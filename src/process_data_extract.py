@@ -11,6 +11,7 @@ for file in os.listdir("data/processes"):
         "_source": {
             "process_id": data["@id"],
             "process_name": data["name"],
+            "process_type": data["processType"],
             "process_location": data["location"]["name"],
             "process_amount": None,
             "process_unit": None,
@@ -20,12 +21,16 @@ for file in os.listdir("data/processes"):
     }
 
     for exchange in data.get("exchanges", []):
-        flow_id = exchange["flow"]["@id"]
+        flow_info = {
+            "flow_id": exchange["flow"]["@id"],
+            "amount": exchange["amount"],
+            "unit": exchange["unit"]["name"],
+        }
 
         if exchange["isInput"]:
-            output_data["_source"]["input_flows"].append(flow_id)
+            output_data["_source"]["input_flows"].append(flow_info)
         else:
-            output_data["_source"]["output_flows"].append(flow_id)
+            output_data["_source"]["output_flows"].append(flow_info)
 
         # 设定 process_amount 和 process_unit
         if exchange.get("isQuantitativeReference"):
