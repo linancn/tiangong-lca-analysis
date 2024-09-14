@@ -1,8 +1,15 @@
 import json
 import os
 
-for file in os.listdir("data/processes"):
-    with open("data/processes/" + file, "r") as f:
+input_dir = "data/processes"
+output_dir = "output/processes"
+
+
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+for file in os.listdir(input_dir):
+    with open(os.path.join(input_dir, file), "r") as f:
         data = json.load(f)
         # print(data)
 
@@ -31,8 +38,7 @@ for file in os.listdir("data/processes"):
         else:
             output_data["_source"]["output_flows"].append(flow_info)
 
-
-    with open("output/processes/" + file, "w") as f:
+    with open(os.path.join(output_dir, file), "w") as f:
         json.dump(output_data, f, indent=2)
 
     # print(output_data)

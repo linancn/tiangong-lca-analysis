@@ -1,8 +1,15 @@
 import json
 import os
 
-for file in os.listdir("data/flows"):
-    with open("data/flows/" + file, "r") as f:
+input_dir = "data/flows"
+output_dir = "output/flows"
+
+
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+for file in os.listdir(input_dir):
+    with open(os.path.join(input_dir, file), "r") as f:
         data = json.load(f)
         # print(data)
 
@@ -16,7 +23,7 @@ for file in os.listdir("data/flows"):
         },
     }
 
-    with open("output/flows/" + file, "w") as f:
+    with open(os.path.join(output_dir, file), "w") as f:
         json.dump(output_data, f, indent=2)
 
     # print(output_data)
