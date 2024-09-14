@@ -147,3 +147,4 @@ dmypy.json
 .pytype/
 
 data
+output
