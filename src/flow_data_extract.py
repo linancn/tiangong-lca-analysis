@@ -12,7 +12,7 @@ for file in os.listdir("data/flows"):
             "flow_id": data["@id"],
             "flow_name": data["name"],
             "flow_type": data["flowType"],
-            "flow_unit": data["flowProperties"]["refUnit"],
+            "flow_category": data["category"],
         },
     }
 
