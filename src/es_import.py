@@ -8,9 +8,8 @@ load_dotenv()
 
 es = Elasticsearch(
     hosts=["http://39.105.216.221:9200/"],
-    http_auth=(os.getenv("USERNAME"), os.getenv("PASSWORD")),
+    basic_auth=(os.getenv("USERNAME"), os.getenv("PASSWORD")),
 )
-
 
 process_mapping = {
     "mappings": {
